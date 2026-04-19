@@ -58,11 +58,11 @@ function getGalaxyMultiplier() {
 	let totalGalaxyPower = getGalaxyPower()
 
 	let matterGalaxyPower = totalGalaxyPower;
-	let effectiveMatterGalaxyCount = getFreeGalaxyCount();
+	let effectiveMatterGalaxyCount = game.matterGalaxies;
 	let matterGalaxyMultiplier = matterGalaxyPower.pow(effectiveMatterGalaxyCount);
 
 	let freeGalaxyPower = totalGalaxyPower;
-	let effectiveFreeGalaxyCount = new Decimal(0);
+	let effectiveFreeGalaxyCount = getFreeGalaxyCount();
 	let freeGalaxyMultiplier = freeGalaxyPower.pow(effectiveFreeGalaxyCount)
 
 	let syntheticGalaxyPower = totalGalaxyPower;
