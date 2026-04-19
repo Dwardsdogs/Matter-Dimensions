@@ -1,0 +1,41 @@
+Infinity - Gain Infinity Points from getting to 1.8e308
+Break Infinity - Allows you to go above 1.8e308
+Eternity - Gain Eternity Points from getting to 1.8e308 Infinity Points
+Break Eternity - Allows you to go above 1e1.8e308
+Reality - Gain Reality Points from getting to 1.8e308 Eternity Points
+Break Reality - Allows you to go above 1e1e1.8e308
+Big Rip - happens after getting infinite dark energy
+
+UPGRADE IDEAS:
+dimboosts are stronger
+add more dimensions when buying dimension upgrades
+increase dimension upgrade multiplier
+decrease distant galaxy scaling
+increase distant galaxy threshold
+decrease remote galaxy scaling
+increase remote galaxy threshold
+decrease scaling past infinity?
+
+TO-DO:
+add settings
+add buy max button
+fix dimboosts, make it start at only boosting 1st dim
+
+RANDOM IDEAS:
+custom game backgrounds
+optional background music
+
+CURRENT IDEAS:
+add more to replicanti, make it more powerful. rework it.
+add a new dimension type: Infinity Dimensions 
+generate infinity power, boosting certain things such as:
+dimension mult + power^2
+dimension purchase power + power^0.01
+dimension boost power + power^0.02
+galaxy power + (log10(power)^0.5)/100
+generate x% of IP gained every second x = log10(power)^2
+
+infinity power
+infinity points
+matter
+replicanti
