@@ -25,6 +25,7 @@ body {
 
 #main,
 #infinity-dimensions,
+#time-dimensions,
 #continuum,
 #generator,
 #settings {
@@ -36,20 +37,35 @@ body {
 }
 
 #top-bar {
-	text-align: center;
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+	align-items: center;
 	padding: 5px;
 	font-size: 20px;
 	text-shadow: 0 0 5px #0095ff;
 }
 
 #infinity-points {
-	position: relative;
-	top: -100px;
-	left: -100px;
+	justify-self: end;
 	text-align: right;
-	padding: 5px;
 	font-size: 15px;
 	text-shadow: 0 0 5px #ffffff;
+	padding: 20px;
+}
+
+#matter {
+	justify-self: center;
+	font-size: 30px;
+	text-shadow: 0 0 5px #0095ff;
+}
+
+#eternity-points {
+	justify-self: start;
+	text-align: left;
+
+	font-size: 15px;
+	text-shadow: 0 0 5px rgb(162, 0, 255);
+	padding: 20px;
 }
 
 #tabs {
@@ -180,6 +196,44 @@ body {
 	box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
 }
 
+#eternity-button.unaffordable {
+	background-color: rgb(0, 0, 0);
+	border: 1px solid rgb(162, 0, 255);
+	color: rgb(255, 255, 255);
+	font-size: 15px;
+	width: 200px;
+	height: 100px;
+}
+
+#eternity-button.unaffordable:hover {
+	background-color: rgb(255, 255, 255);
+	border: 1px solid rgb(162, 0, 255);
+	color: rgb(0, 0, 0);
+	font-size: 15px;
+	width: 200px;
+	height: 100px;
+}
+
+#eternity-button.affordable {
+	background-color: rgb(162, 0, 255);
+	border: 1px solid rgb(0, 0, 0);
+	color: white;
+	font-size: 15px;
+	width: 200px;
+	height: 100px;
+	box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+}
+
+#eternity-button.affordable:hover {
+	background-color: rgb(162, 0, 255);
+	border: 1px solid rgb(255, 255, 255);
+	color: rgb(0, 0, 0);
+	font-size: 15px;
+	width: 200px;
+	height: 100px;
+	box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+}
+
 #break-infinity-button.purchased,
 #break-infinity-button.purchased:hover {
 	background-color: rgb(0, 0, 0);
@@ -233,19 +287,26 @@ body {
 	background-color: rgb(255, 255, 255);
 }
 
+#infinity button.continuum:not(#break-infinity-button, #infinity-button) {
+	background: rgb(0, 0, 0);
+	border: 1px solid #ffffff;
+	color: white;
+}
+
 #continuum-galaxy {
-  gap: 100px;
+  	gap: 100px;
 }
 
 div[id^="dimension-"],
 div[id^="infinity-dimension-"],
+div[id^="time-dimension-"],
 div[id^="continuum-"],
 #dimension-boost,
 #galaxy {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 6px 10px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 6px 10px;
 }
 
 #dimension-boost-cost,
@@ -257,49 +318,59 @@ div[id^="continuum-"],
 
 div[id^="dimension-"]:not(#dimension-boost):nth-child(odd),
 div[id^="continuum-"]:nth-child(odd) {
-  background: rgb(29, 57, 80);
-  border-radius: 5px;
+	background: rgb(29, 57, 80);
+	border-radius: 5px;
 }
 
-div[id^="infinity-dimension-"]:nth-child(even) {
+div[id^="infinity-dimension-"]:nth-child(odd) {
 	background: rgb(255, 255, 255);
   	border-radius: 5px;
 	color: black;
 }
 
+div[id^="time-dimension-"]:nth-child(odd) {
+	background: rgb(162, 0, 255);
+  	border-radius: 5px;
+	color: rgb(255, 255, 255);
+}
+
 div[id^="dimension-"]:not(#dimension-boost) span,
 div[id^="infinity-dimension-"] span,
+div[id^="time-dimension-"] span,
 div[id^="continuum-"] span {
-  font-weight: bold;
-  margin-left: 12px;
+	font-weight: bold;
+	margin-left: 12px;
 }
 
 button {
-  border: none;
-  color: white;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: 0.2s;
-  font-weight: bold;
-  border: 1px solid #44aa9c;
+	border: none;
+	color: white;
+	cursor: pointer;
+	border-radius: 5px;
+	transition: 0.2s;
+	font-weight: bold;
+	border: 1px solid #44aa9c;
 }
 
 div[id^="dimension-"] button,
 div[id^="infinity-dimension-"] button,
+div[id^="time-dimension-"] button,
 div[id^="continuum-"] button {
-  order: 2;
-  width: 220px;
-  height: 45px;
+	order: 2;
+	width: 220px;
+	height: 45px;
 }
 
 div[id^="dimension-"] span,
 div[id^="infinity-dimension-"] span,
+div[id^="time-dimension-"] span,
 div[id^="continuum-"] span {
-  order: 1;
+  	order: 1;
 }
 
 [id^="dimension-"][id$="-amount"]:not(#dimension-boost-amount),
-[id^="infinity-dimension-"][id$="-amount"] {
+[id^="infinity-dimension-"][id$="-amount"],
+[id^="time-dimension-"][id$="-amount"] {
     position: relative;
     top: 50%;
 	right: 15%;
@@ -313,99 +384,100 @@ div[id^="continuum-"] span {
 
 [id^="dimension-"][id$="-multiplier"],
 [id^="infinity-dimension-"][id$="-multiplier"],
+[id^="time-dimension-"][id$="-multiplier"],
 [id^="continuum-"][id$="-multiplier"] {
     position: relative;
     top: 50%;
 }
 
 #continuum-upgrade-button {
-  width: 200px;
-  height: px;
-  margin: 0 auto;
-  display: block;
+	width: 200px;
+	height: px;
+	margin: 0 auto;
+	display: block;
 }
 
 .dimboost-galaxy-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 20px;
-  
-  width: 100%;
-  padding-bottom: 100px; 
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: flex-start;
+	gap: 20px;
+	
+	width: 100%;
+	padding-bottom: 100px; 
 }
 
 #dimension-boost, 
 #galaxy {
-  width: 450px;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+	width: 450px;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 #dimension-boost span,
 #galaxy span {
-  display: block;
-  margin: 3px 0;
-  color: #ccc;
-  text-align: center;
+	display: block;
+	margin: 3px 0;
+	color: #ccc;
+	text-align: center;
 }
 
 #dimension-boost button,
 #galaxy button {
-  border-radius: 6px;
+	border-radius: 6px;
 
-  font-weight: bold;
-  text-align: center;
-  min-width: 280px;
+	font-weight: bold;
+	text-align: center;
+	min-width: 280px;
 
-  margin-top: 10px;
+	margin-top: 10px;
 
-  width: 220px;
-  height: 75px;
-  font-size: 12px;
+	width: 220px;
+	height: 75px;
+	font-size: 12px;
 }
 
 #dimension-boost button.continuum,
 #galaxy button.continuum {
-  background: rgb(0, 0, 0);
-  border: 1px solid #ffffff;
+	background: rgb(0, 0, 0);
+	border: 1px solid #ffffff;
 }
 
 .affordable {
-  background: #1d1b22;
-  border: 1px solid #1bbb36;
+  	background: #1d1b22;
+  	border: 1px solid #1bbb36;
 }
 
 .affordable:hover {
-  background: #1bbb36;
+  	background: #1bbb36;
 }
 
 .unaffordable {
-  background: #752626;
-  border: 1px solid #b84b5f;
+  	background: #752626;
+  	border: 1px solid #b84b5f;
 }
 
 .unaffordable:hover {
-  background: #b84b5f;
+  	background: #b84b5f;
 }
 
 .continuum {
-  background: rgb(0, 0, 0);
-  border: 1px solid #ffffff;
+	background: rgb(0, 0, 0);
+	border: 1px solid #ffffff;
 }
 
 div[id^="generator-"] button {
-  width: 220px;
-  height: 75px;
-  padding: 6px 10px;
-  color: rgb(255, 255, 255);
-  border-radius: 6px;
-  font-weight: bold;
-  text-align: center;
-  transition: 0.2s;
+	width: 220px;
+	height: 75px;
+	padding: 6px 10px;
+	color: rgb(255, 255, 255);
+	border-radius: 6px;
+	font-weight: bold;
+	text-align: center;
+	transition: 0.2s;
 }
 
 #continuum-description {
@@ -417,44 +489,44 @@ div[id^="generator-"] button {
 }
 
 #generator-tickspeed-unlock {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 10px;
-  min-height: 200px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	gap: 10px;
+	min-height: 200px;
 }
 
 #generator-tickspeed {
-  background: rgb(255, 179, 0);
-  border: 2px solid #645000;
+	background: rgb(255, 179, 0);
+	border: 2px solid #645000;
 }
 
 #generator-tickspeed-unlock-button {
-  background: rgb(255, 179, 0);
-  border: 2px solid #645000;
-  box-shadow: 0 0 20px rgba(255, 208, 0, 0.4);
-  display: block;
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  min-height: 200px;
+	background: rgb(255, 179, 0);
+	border: 2px solid #645000;
+	box-shadow: 0 0 20px rgba(255, 208, 0, 0.4);
+	display: block;
+	width: 100%;
+	height: 100%;
+	box-sizing: border-box;
+	min-height: 200px;
 }
 
 div[id^="generator-"] button.affordable {
-  background: rgb(64, 104, 64);
-  border: 2px solid #009c80;
-  box-shadow: 0 0 10px rgba(0, 255, 153, 0.4);
+	background: rgb(64, 104, 64);
+	border: 2px solid #009c80;
+	box-shadow: 0 0 10px rgba(0, 255, 153, 0.4);
 }
 
 div[id^="generator-"] button.affordable:hover {
-  background: rgb(93, 151, 93);
-  border: 2px solid #009c80;
-  box-shadow: 0 0 10px rgba(68, 170, 156, 0.4);
+	background: rgb(93, 151, 93);
+	border: 2px solid #009c80;
+	box-shadow: 0 0 10px rgba(68, 170, 156, 0.4);
 }
 
 div[id^="generator-"] button.unaffordable {
-  background: #515151;
-  border: 1px solid #006c97;
+	background: #515151;
+	border: 1px solid #006c97;
 }
 
 .tooltip {
@@ -479,7 +551,8 @@ div[id^="generator-"] button.unaffordable {
 }
 
 [id^="dimension-"].tooltip-text,
-[id^="infinity-dimension-"].tooltip-text {
+[id^="infinity-dimension-"].tooltip-text,
+[id^="time-dimension-"].tooltip-text {
 	transform: translateX(-55%);
 }
 
@@ -496,18 +569,41 @@ div[id^="generator-"] button.unaffordable {
 	font-size: 13px;
 }
 
-#tickspeed {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
+#tickspeed,
+#max-all-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 5px;
 }
 
-#buy-tickspeed {
+#double-infinity-power-upgrade {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 5px;
+	padding-bottom: 15px; 
+	padding-top: 15px; 
+}
+
+#buy-tickspeed,
+#double-infinity-power-upgrade-button {
 	height: 35px;
 	width: 325px;
-	padding: 5px 60px;
 	font-size: 15px;
+}
+
+#max-all-button {
+	height: 30px;
+	width: 100px;
+	font-size: 10px;
+	align-items: center;
+	background: #1d1b22;
+  	border: 1px solid #1bbb36;
+}
+
+#max-all-button:hover {
+	background: #1bbb36;
 }
 
 #tickspeed-multiplier {
@@ -516,25 +612,26 @@ div[id^="generator-"] button.unaffordable {
 }
 
 button:focus {
-  outline: none;
+  	outline: none;
 }
 
 #infinity-upgrades,
 #break-infinity-upgrades {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 6px;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	gap: 6px;
 }
 
 #infinity-upgrades-row-1,
 #infinity-upgrades-row-2,
 #infinity-upgrades-row-3,
 #break-infinity-upgrades-row-1,
-#break-infinity-upgrades-row-2 {
-  display: flex;
-  width: 100%;
-  gap: 6px;
+#break-infinity-upgrades-row-2,
+#break-infinity-upgrades-row-3 {
+	display: flex;
+	width: 100%;
+	gap: 6px;
 }
 
 #replicanti {
@@ -551,9 +648,50 @@ button:focus {
 #synthetic-galaxy-amount {
 	color: rgb(0, 116, 225);
 	font-size: 25px;
+	margin-bottom: 15px;
 }
 
 #replicanti button {
 	width: 200;
 	height: 75px;
+}
+
+#eternity-milestones div {
+	display: flex;
+	flex-direction: column;
+	width: 700px;
+	height: 75px;
+	gap: 6px;
+	background-color: rgb(100, 100, 100);
+	border: 1px solid rgb(162, 0, 255);
+	font-size: 20px;
+	justify-content: center;
+	align-items: center;
+	border-radius: 6px;
+}
+
+#eternity-milestones {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
+}
+
+#eternity-milestones div.unlocked {
+	background-color: rgb(162, 0, 255);
+}
+
+#eternity {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	gap: 6px;
+}
+
+#time-dimensions-time-shard-amount {
+	font-size: 20px;
+	color: rgb(162, 0, 255);
+	padding: 20px;
+	font-weight: bold;
 }

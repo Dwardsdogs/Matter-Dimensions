@@ -58,7 +58,19 @@ let game = {
 				tickspeedStrength: false
 			}
 		},
+		doubleInfinityPowerUpgrade: false,
+		breakInfinityUpgrades: false,
 		infinityDimensions: {
+			dim1: false,
+			dim2: false,
+			dim3: false,
+			dim4: false,
+			dim5: false,
+			dim6: false,
+			dim7: false,
+			dim8: false
+		},
+		timeDimensions: {
 			dim1: false,
 			dim2: false,
 			dim3: false,
@@ -73,9 +85,11 @@ let game = {
 	continuumLevel: new Decimal(0),
 
 	infinity: {
+		totalGeneratedIP: new Decimal(0),
 		infinityPoints: new Decimal(0),
 		unlocked: false,
 
+		doubleInfinityPowerUpgrade: new Decimal(0),
 		infinityPower: new Decimal(1),
 		infinityDimensions: {
 			levels: {
@@ -131,15 +145,45 @@ let game = {
 			upgrade4: new Decimal(0),
 			upgrade5: new Decimal(0),
 			upgrade6: new Decimal(0),
-			upgrade7: new Decimal(0)
+			upgrade7: new Decimal(0),
+			upgrade8: false
 		}
 	},
 
 	eternity: {
 		unlocked: false,
+		eternityPoints: new Decimal(0),
+		totalGeneratedEP: new Decimal(0),
+		eternities: new Decimal(0),
+		
 		breakEternityUpgrades: {
 			unlocked: false
-		}
+		},
+
+
+		timeShards: new Decimal(0),
+		timeDimensions: {
+			levels: {
+				dim1: new Decimal(0),
+				dim2: new Decimal(0),
+				dim3: new Decimal(0),
+				dim4: new Decimal(0),
+				dim5: new Decimal(0),
+				dim6: new Decimal(0),
+				dim7: new Decimal(0),
+				dim8: new Decimal(0)
+			},
+			amounts: {
+				dim1: new Decimal(0),
+				dim2: new Decimal(0),
+				dim3: new Decimal(0),
+				dim4: new Decimal(0),
+				dim5: new Decimal(0),
+				dim6: new Decimal(0),
+				dim7: new Decimal(0),
+				dim8: new Decimal(0)
+			}
+		},
 	},
 
 	reality: {
@@ -212,6 +256,124 @@ load()
 setInterval(save, 5000)
 
 function resetVariables(layer) {
+	if (layer >= 4) {
+		if (game.eternity.eternities.lt(10)) {
+			game.continuum = {
+				dimensions: {
+					dim1: false,
+					dim2: false,
+					dim3: false,
+					dim4: false,
+					dim5: false,
+					dim6: false,
+					dim7: false,
+					dim8: false
+				},
+				tickspeed: false,
+				dimboosts: false,
+				galaxies: false,
+				generators: {
+					tickspeed: {
+						tickspeedGain: false,
+						tickspeedGain2: false,
+						tickspeedGain3: false,
+						tickspeedDecay: false,
+						tickspeedStrength: false
+					}
+				},
+				doubleInfinityPowerUpgrade: false,
+				breakInfinityUpgrades: false,
+				infinityDimensions: {
+					dim1: false,
+					dim2: false,
+					dim3: false,
+					dim4: false,
+					dim5: false,
+					dim6: false,
+					dim7: false,
+					dim8: false
+				},
+				timeDimensions: {
+					dim1: false,
+					dim2: false,
+					dim3: false,
+					dim4: false,
+					dim5: false,
+					dim6: false,
+					dim7: false,
+					dim8: false
+				}
+			};
+			game.continuumLevel = new Decimal(0);
+		}
+
+		game.infinity.totalGeneratedIP = new Decimal(0)
+		game.infinity.infinityPoints = new Decimal(0)
+		game.infinity.unlocked = false
+		game.infinity.doubleInfinityPowerUpgrade = new Decimal(0)
+		game.infinity.infinityPower = new Decimal(1)
+		game.infinity.infinityDimensions = {
+			levels: {
+				dim1: new Decimal(0),
+				dim2: new Decimal(0),
+				dim3: new Decimal(0),
+				dim4: new Decimal(0),
+				dim5: new Decimal(0),
+				dim6: new Decimal(0),
+				dim7: new Decimal(0),
+				dim8: new Decimal(0)
+			},
+			amounts: {
+				dim1: new Decimal(0),
+				dim2: new Decimal(0),
+				dim3: new Decimal(0),
+				dim4: new Decimal(0),
+				dim5: new Decimal(0),
+				dim6: new Decimal(0),
+				dim7: new Decimal(0),
+				dim8: new Decimal(0)
+			}
+		}
+		game.infinity.replicanti = {
+			amount: new Decimal(1),
+			syntheticGalaxies: new Decimal(0),
+			upgrades: {
+				upgrade1: new Decimal(0),
+				upgrade2: new Decimal(0)
+			}
+		}
+		if (game.eternity.eternities.lt(2)) {
+			game.infinity.infinityUpgrades.upgrade1 = false
+			game.infinity.infinityUpgrades.upgrade2 = false
+			game.infinity.infinityUpgrades.upgrade3 = false
+			game.infinity.infinityUpgrades.upgrade4 = false
+		}
+		if (game.eternity.eternities.lt(3)) {
+			game.infinity.infinityUpgrades.upgrade5 = false
+			game.infinity.infinityUpgrades.upgrade6 = false
+			game.infinity.infinityUpgrades.upgrade7 = false
+			game.infinity.infinityUpgrades.upgrade8 = false
+		}
+		if (game.eternity.eternities.lt(4)) {
+			game.infinity.infinityUpgrades.upgrade9 = false
+			game.infinity.infinityUpgrades.upgrade10 = false
+			game.infinity.infinityUpgrades.upgrade11 = false
+			game.infinity.infinityUpgrades.upgrade12 = false
+		}
+		if (game.eternity.eternities.lt(5)) {
+			game.infinity.breakInfinityUpgrades.unlocked = false
+		}
+		if (game.eternity.eternities.lt(7)) {
+			game.infinity.breakInfinityUpgrades.upgrade1 = false
+			game.infinity.breakInfinityUpgrades.upgrade2 = false
+			game.infinity.breakInfinityUpgrades.upgrade3 = false
+			game.infinity.breakInfinityUpgrades.upgrade8 = false
+		}
+		game.infinity.breakInfinityUpgrades.upgrade4 = new Decimal(0)
+		game.infinity.breakInfinityUpgrades.upgrade5 = new Decimal(0)
+		game.infinity.breakInfinityUpgrades.upgrade6 = new Decimal(0)
+		game.infinity.breakInfinityUpgrades.upgrade7 = new Decimal(0)
+	}
 	if (layer >= 3) {
 		game.matterGalaxies = new Decimal(0);
 	}

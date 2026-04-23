@@ -5,18 +5,30 @@ function updateReplicanti(diff) {
 }
 
 function getReplicantiMultiplier() {
-	let multiplier = new Decimal(0.01);
+	let multiplier = new Decimal(1.01);
 	let decayFactor = new Decimal(2);
-	multiplier = multiplier.mul(new Decimal(1.2).pow(game.infinity.replicanti.upgrades.upgrade1));
-	multiplier = multiplier.mul(game.infinity.replicanti.upgrades.upgrade2.add(1));
-	multiplier = multiplier.pow(new Decimal(1).div(decayFactor.pow(game.infinity.replicanti.amount.log(new Decimal("1e100")))));
-	multiplier = multiplier.add(1);
+	multiplier = multiplier.pow(new Decimal(1.2).pow(game.infinity.replicanti.upgrades.upgrade1));
+	multiplier = multiplier.pow(game.infinity.replicanti.upgrades.upgrade2.add(1));
+	multiplier = multiplier.pow(new Decimal(1).div(decayFactor.pow(game.infinity.replicanti.amount.log(new Decimal("1e1000")))));
 	return multiplier;
 }
 
-function getSyntheticGalaxyCost() {
-	let cost = new Decimal(1e100);
-	cost = cost.pow(game.infinity.replicanti.syntheticGalaxies.add(1));
+function getSyntheticGalaxyCost(level = game.infinity.replicanti.syntheticGalaxies) {
+	let startCost = new Decimal("1e100");
+	let addedCost = new Decimal("1e100");
+	let unstableScalingPosition = new Decimal(20);
+	let unstableScalingPenalty = new Decimal(25);
+	let distortedScalingPosition = new Decimal(150);
+	let distortedScalingPenalty = new Decimal(1.01);
+
+	addedCost = addedCost.pow(level);
+	cost = startCost.mul(addedCost);
+	let unstableScaling = Decimal.max(level.sub(unstableScalingPosition.sub(1)), 0);
+	unstableScaling = unstableScaling.mul(unstableScaling.add(1)).div(2).mul(unstableScalingPenalty);
+	unstableScaling = new Decimal(10).pow(unstableScaling)
+	let distortedScaling = Decimal.max(new Decimal(distortedScalingPenalty).pow(level.sub(distortedScalingPosition.sub(1))), new Decimal(1));
+	cost = cost.mul(unstableScaling);
+	cost = cost.pow(distortedScaling);
 	return cost;
 }
 

@@ -89,6 +89,9 @@ function getDimensionBoostPower() {
 	if (game.infinity.infinityUpgrades.upgrade2 == true) {
 		multiplier = multiplier.mul(1.25)
 	}
+	if (game.infinity.infinityPower.gte(1e50)) {
+		multiplier = multiplier.mul(game.infinity.infinityPower.div(1e50).pow(0.02))
+	}
 	return multiplier;
 }
 

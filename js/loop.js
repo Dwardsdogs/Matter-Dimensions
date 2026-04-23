@@ -7,12 +7,9 @@ function gameLoop() {
 
 	updateDimensions(diff);
 	updateInfinityDimensions(diff);
+	updateTimeDimensions(diff);
 	updateContinuum();
 	updateReplicanti(diff);
-	updateGenerators(diff);
-	if (false == true) {
-		game.infinity.infinityPoints = game.infinity.infinityPoints.add(getInfinityPointIncome().mul(0).mul(diff))
-	}
 }
 
 function updateUI() {
@@ -21,14 +18,23 @@ function updateUI() {
 	if (game.infinity.unlocked == true) {
 		document.getElementById("infinity-points").textContent =
 		`You have ${format(game.infinity.infinityPoints, 0)} Infinity Points`;
+	} else {
+		document.getElementById("infinity-points").textContent = ``;
+	}
+	if (game.eternity.unlocked == true) {
+		document.getElementById("eternity-points").textContent =
+		`You have ${format(game.eternity.eternityPoints, 0)} Eternity Points`;
+	} else {
+		document.getElementById("eternity-points").textContent = ``;
 	}
 
 	updateDimensionsUI();
 	updateInfinityDimensionsUI();
+	updateTimeDimensionsUI();
 	updateInfinityUI();
 	updateContinuumUI();
 	updateReplicantiUI();
-	updateGeneratorUI();
+	updateEternityUI();
 }
 
 setInterval(gameLoop, 50);

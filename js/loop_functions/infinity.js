@@ -4,6 +4,8 @@ function updateInfinityUI() {
 		document.getElementById("infinity-tab-group").classList.remove("locked")
 	} else if (game.matter.gte(new Decimal("1.8e308"))) {
 		game.infinity.unlocked = true;
+	} else {
+		document.getElementById("infinity-tab-group").classList.add("locked")
 	}
 	//infinity button
 	if (game.matter.gte(new Decimal("1.8e308"))) {
@@ -396,7 +398,7 @@ function updateInfinityUI() {
 		element.classList.remove("affordable");
 		element.classList.remove("unaffordable");
 		element.innerHTML =
-			`Unlock Continuum<br><br>
+			`Unlock Continuum<br>
 			UNLOCKED<br>
 			(Check Infinity Tab)`;
 	} else if (game.infinity.infinityPoints.gte(10)) {
@@ -421,7 +423,7 @@ function updateInfinityUI() {
 		element.classList.remove("affordable");
 		element.classList.remove("unaffordable");
 		element.innerHTML =
-			`Unlock Replicanti<br><br>
+			`Unlock Replicanti<br>
 			UNLOCKED<br>
 			(Check Infinity Tab)`;
 	} else if (game.infinity.infinityPoints.gte(1e5)) {
@@ -454,70 +456,143 @@ function updateInfinityUI() {
 		element.classList.remove("unaffordable");
 		element.classList.remove("purchased");
 		element.innerHTML =
-			`Unlock the Infinity Dimensions<br>
+			`Unlock the Infinity Dimensions<br><br>
 			Cost: 10Qd IP`;
 	} else {
 		element.classList.add("unaffordable");
 		element.classList.remove("affordable");
 		element.classList.remove("purchased");
 		element.innerHTML =
-			`Unlock the Infinity Dimensions<br>
+			`Unlock the Infinity Dimensions<br><br>
 			Cost: 10Qd IP`;
 	}
 	//break infinity upgrade 4
 	element = document.getElementById("break-infinity-upgrade-4")
-	element.innerHTML =
+	if (game.continuum.breakInfinityUpgrades == true) {
+		element.classList.add("continuum");
+		element.classList.remove("affordable");
+		element.classList.remove("unaffordable");
+		element.innerHTML =
 		`Double Infinity<br>
 		Point Gain<br>
 		Currently: ×${format(new Decimal(2).pow(game.infinity.breakInfinityUpgrades.upgrade4), 2, false)}<br>
-		Cost: ${format(getCostScale(10, 10, game.infinity.breakInfinityUpgrades.upgrade4, 10))} IP`;
-	if (game.infinity.infinityPoints.gte(getCostScale(10, 10, game.infinity.breakInfinityUpgrades.upgrade4, 10))) {
-		element.classList.add("affordable");
-		element.classList.remove("unaffordable");
+		Continuum: ${format(game.infinity.breakInfinityUpgrades.upgrade4)}`;
 	} else {
-		element.classList.add("unaffordable");
-		element.classList.remove("affordable");
+		element.innerHTML =
+		`Double Infinity<br>
+		Point Gain<br>
+		Currently: ×${format(new Decimal(2).pow(game.infinity.breakInfinityUpgrades.upgrade4), 2, false)}<br>
+		Cost: ${format(getCostScale(10, 10, game.infinity.breakInfinityUpgrades.upgrade4))} IP`;
+		element.classList.remove("continuum");
+		if (game.infinity.infinityPoints.gte(getCostScale(10, 10, game.infinity.breakInfinityUpgrades.upgrade4))) {
+			element.classList.add("affordable");
+			element.classList.remove("unaffordable");
+		} else {
+			element.classList.add("unaffordable");
+			element.classList.remove("affordable");
+		}
 	}
 	//break infinity upgrade 5
 	element = document.getElementById("break-infinity-upgrade-5")
-	element.innerHTML =
+	if (game.continuum.breakInfinityUpgrades == true) {
+		element.classList.add("continuum");
+		element.classList.remove("affordable");
+		element.classList.remove("unaffordable");
+		element.innerHTML =
+		`Decrease Pre-Infinity<br>
+		Tickspeed Cost Scaling<br>
+		Currently: ×${format(game.infinity.breakInfinityUpgrades.upgrade5.div(10).add(1), 2, false)} slower<br>
+		Continuum: ${format(game.infinity.breakInfinityUpgrades.upgrade5)}`;
+	} else {
+		element.innerHTML =
 		`Decrease Pre-Infinity<br>
 		Tickspeed Cost Scaling<br>
 		Currently: ×${format(game.infinity.breakInfinityUpgrades.upgrade5.div(10).add(1), 2, false)} slower<br>
 		Cost: ${format(getCostScale(25, 30, game.infinity.breakInfinityUpgrades.upgrade5, 10))} IP`;
-	if (game.infinity.infinityPoints.gte(getCostScale(25, 30, game.infinity.breakInfinityUpgrades.upgrade5, 10))) {
-		element.classList.add("affordable");
-		element.classList.remove("unaffordable");
-	} else {
-		element.classList.add("unaffordable");
-		element.classList.remove("affordable");
+		element.classList.remove("continuum");
+		if (game.infinity.infinityPoints.gte(getCostScale(25, 30, game.infinity.breakInfinityUpgrades.upgrade5, 10))) {
+			element.classList.add("affordable");
+			element.classList.remove("unaffordable");
+		} else {
+			element.classList.add("unaffordable");
+			element.classList.remove("affordable");
+		}
 	}
 	//break infinity upgrade 6
 	element = document.getElementById("break-infinity-upgrade-6")
-	element.innerHTML =
+	if (game.continuum.breakInfinityUpgrades == true) {
+		element.classList.add("continuum");
+		element.classList.remove("affordable");
+		element.classList.remove("unaffordable");
+		element.innerHTML =
+		`Decrease Pre-Infinity<br>
+		Dimension Cost Scaling<br>
+		Currently: ×${format(game.infinity.breakInfinityUpgrades.upgrade6.div(10).add(1), 2, false)} slower<br>
+		Continuum: ${format(game.infinity.breakInfinityUpgrades.upgrade6)}`;
+	} else {
+		element.innerHTML =
 		`Decrease Pre-Infinity<br>
 		Dimension Cost Scaling<br>
 		Currently: ×${format(game.infinity.breakInfinityUpgrades.upgrade6.div(10).add(1), 2, false)} slower<br>
 		Cost: ${format(getCostScale(50, 20, game.infinity.breakInfinityUpgrades.upgrade6, 10))} IP`;
-	if (game.infinity.infinityPoints.gte(getCostScale(50, 20, game.infinity.breakInfinityUpgrades.upgrade6, 10))) {
-		element.classList.add("affordable");
-		element.classList.remove("unaffordable");
-	} else {
-		element.classList.add("unaffordable");
-		element.classList.remove("affordable");
+		element.classList.remove("continuum");
+		if (game.infinity.infinityPoints.gte(getCostScale(50, 20, game.infinity.breakInfinityUpgrades.upgrade6, 10))) {
+			element.classList.add("affordable");
+			element.classList.remove("unaffordable");
+		} else {
+			element.classList.add("unaffordable");
+			element.classList.remove("affordable");
+		}
 	}
 	//break infinity upgrade 7
 	element = document.getElementById("break-infinity-upgrade-7")
-	element.innerHTML =
+	if (game.continuum.breakInfinityUpgrades == true) {
+		element.classList.add("continuum");
+		element.classList.remove("affordable");
+		element.classList.remove("unaffordable");
+		element.innerHTML =
+		`Gain free Dimension<br>
+		Boosts<br>
+		Currently: +${format(game.infinity.breakInfinityUpgrades.upgrade7)}<br>
+		Continuum: ${format(game.infinity.breakInfinityUpgrades.upgrade7)}`;
+	} else {
+		element.innerHTML =
 		`Gain free Dimension<br>
 		Boosts<br>
 		Currently: +${format(game.infinity.breakInfinityUpgrades.upgrade7)}<br>
 		Cost: ${format(getCostScale(100, 5, game.infinity.breakInfinityUpgrades.upgrade7, 10))} IP`;
-	if (game.infinity.infinityPoints.gte(getCostScale(100, 5, game.infinity.breakInfinityUpgrades.upgrade7, 10))) {
+		element.classList.remove("continuum");
+		if (game.infinity.infinityPoints.gte(getCostScale(100, 5, game.infinity.breakInfinityUpgrades.upgrade7, 10))) {
+			element.classList.add("affordable");
+			element.classList.remove("unaffordable");
+		} else {
+			element.classList.add("unaffordable");
+			element.classList.remove("affordable");
+		}
+	}
+	//break infinity upgrade 8
+	element = document.getElementById("break-infinity-upgrade-8")
+	if (game.infinity.breakInfinityUpgrades.upgrade8 == true) {
+		element.classList.add("purchased");
+		element.classList.remove("affordable");
+		element.classList.remove("unaffordable");
+		element.innerHTML =
+			`Replicanti boosts Infinity Dimensions<br>
+			UNLOCKED<br>
+			(Check Replicanti for Info)`;
+	} else if (game.infinity.infinityPoints.gte(1e50)) {
 		element.classList.add("affordable");
 		element.classList.remove("unaffordable");
+		element.classList.remove("purchased");
+		element.innerHTML =
+			`Replicanti boosts Infinity Dimensions<br><br>
+			Cost: 1e50 IP`;
 	} else {
 		element.classList.add("unaffordable");
 		element.classList.remove("affordable");
+		element.classList.remove("purchased");
+		element.innerHTML =
+			`Replicanti boosts Infinity Dimensions<br><br>
+			Cost: 1e50 IP`;
 	}
 }

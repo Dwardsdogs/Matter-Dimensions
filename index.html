@@ -11,6 +11,7 @@
 <body>
 
 	<div id="top-bar">
+		<h1 id="eternity-points"></h1>
 		<h1 id="matter"></h1>
 		<h1 id="infinity-points"></h1>
 	</div>
@@ -29,6 +30,7 @@
 			<div class="sub-tabs">
 				<button id="open-dimensions-tab" class="tab-btn small active" onclick="openTab('main', this)">Matter Dimensions</button>
 				<button id="open-infinity-dimensions-tab" class="tab-btn small locked" onclick="openTab('infinity-dimensions', this)">Infinity Dimensions</button>
+				<button id="open-time-dimensions-tab" class="tab-btn small locked" onclick="openTab('time-dimensions', this)">Time Dimensions</button>
 			</div>
 		</div>
 
@@ -44,7 +46,9 @@
 		<div id="eternity-tab-group" class="tab-group locked">
 			<button class="tab-btn" onclick="openTab(null, this)">Eternity</button>
 			<div class="sub-tabs">
-				<button id="open-eternity-tab" class="tab-btn small active" onclick="openTab('eternity', this)">Eternity Upgrades</button>
+				<button id="open-eternity-tab" class="tab-btn small active" onclick="openTab('eternity', this)">Eternity Milestones</button>
+				<button id="open-time-study-tree-tab" class="tab-btn small" onclick="openTab('time-study-tree', this)">Time Study Tree</button>
+				<button id="open-eternity-tab" class="tab-btn small" onclick="openTab('eternity', this)">something</button>
 			</div>
 		</div>
 
@@ -59,10 +63,18 @@
 	</div>
 
 	<div id="settings" class="tab-content">
-		Nah.
+		Hotkeys:<br>
+		Max All: M<br>
+		Dimension Boost: B<br>
+		Matter Galaxy: G<br>
+		Sorry for no real settings.
 	</div>
 
 	<div id="main" class="tab-content">
+
+		<div id="max-all-container">
+			<button id="max-all-button" onclick="maxAllUpgrades()">Max All (M)</button>
+		</div>
 
 		<div id="upgrade-dimension-multiplier"></div>
 
@@ -157,6 +169,14 @@
 
 		<div id="infinity-dimensions-infinity-power-amount"></div>
 
+		<div id="double-infinity-power-upgrade">
+			<button id="double-infinity-power-upgrade-button" class="tooltip">
+				<span id="double-infinity-power-upgrade-text"></span>
+				<span id="double-infinity-power-upgrade-tooltip" class="tooltip-text"></span>
+			</button>
+			<span id="double-infinity-power-upgrade-multiplier"></span>
+		</div>
+
 		<div id="infinity-dimension-1">
 			<button id="buy-infinity-dimension-1" class="tooltip">
 				<span id="buy-infinity-dimension-1-text"></span>
@@ -231,6 +251,84 @@
 
 	</div>
 
+	<div id="time-dimensions" class="tab-content">
+
+		<div id="time-dimensions-time-shard-amount"></div>
+
+		<div id="time-dimension-1">
+			<button id="buy-time-dimension-1" class="tooltip">
+				<span id="buy-time-dimension-1-text"></span>
+				<span id="time-dimension-1-tooltip" class="tooltip-text"></span>
+			</button>
+			<span id="time-dimension-1-multiplier"></span>
+			<span id="time-dimension-1-amount"></span>
+		</div>
+
+		<div id="time-dimension-2">
+			<button id="buy-time-dimension-2" class="tooltip">
+				<span id="buy-time-dimension-2-text"></span>
+				<span id="time-dimension-2-tooltip" class="tooltip-text"></span>
+			</button>
+			<span id="time-dimension-2-multiplier"></span>
+			<span id="time-dimension-2-amount"></span>
+		</div>
+
+		<div id="time-dimension-3">
+			<button id="buy-time-dimension-3" class="tooltip">
+				<span id="buy-time-dimension-3-text"></span>
+				<span id="time-dimension-3-tooltip" class="tooltip-text"></span>
+			</button>
+			<span id="time-dimension-3-multiplier"></span>
+			<span id="time-dimension-3-amount"></span>
+		</div>
+
+		<div id="time-dimension-4">
+			<button id="buy-time-dimension-4" class="tooltip">
+				<span id="buy-time-dimension-4-text"></span>
+				<span id="time-dimension-4-tooltip" class="tooltip-text"></span>
+			</button>
+			<span id="time-dimension-4-multiplier"></span>
+			<span id="time-dimension-4-amount"></span>
+		</div>
+
+		<div id="time-dimension-5">
+			<button id="buy-time-dimension-5" class="tooltip">
+				<span id="buy-time-dimension-5-text"></span>
+				<span id="time-dimension-5-tooltip" class="tooltip-text"></span>
+			</button>
+			<span id="time-dimension-5-multiplier"></span>
+			<span id="time-dimension-5-amount"></span>
+		</div>
+
+		<div id="time-dimension-6">
+			<button id="buy-time-dimension-6" class="tooltip">
+				<span id="buy-time-dimension-6-text"></span>
+				<span id="time-dimension-6-tooltip" class="tooltip-text"></span>
+			</button>
+			<span id="time-dimension-6-multiplier"></span>
+			<span id="time-dimension-6-amount"></span>
+		</div>
+
+		<div id="time-dimension-7">
+			<button id="buy-time-dimension-7" class="tooltip">
+				<span id="buy-time-dimension-7-text"></span>
+				<span id="time-dimension-7-tooltip" class="tooltip-text"></span>
+			</button>
+			<span id="time-dimension-7-multiplier"></span>
+			<span id="time-dimension-7-amount"></span>
+		</div>
+
+		<div id="time-dimension-8">
+			<button id="buy-time-dimension-8" class="tooltip">
+				<span id="buy-time-dimension-8-text"></span>
+				<span id="time-dimension-8-tooltip" class="tooltip-text"></span>
+			</button>
+			<span id="time-dimension-8-multiplier"></span>
+			<span id="time-dimension-8-amount"></span>
+		</div>
+
+	</div>
+
 	<div id="infinity" class="tab-content">
 		<button id="infinity-button"></button>
 		<div id="infinity-upgrades">
@@ -260,11 +358,14 @@
 				<button id="break-infinity-upgrade-2"></button>
 				<button id="break-infinity-upgrade-3"></button>
 			</div>
-			<div id="break-infinity-upgrades-row-1">
+			<div id="break-infinity-upgrades-row-2">
 				<button id="break-infinity-upgrade-4"></button>
 				<button id="break-infinity-upgrade-5"></button>
 				<button id="break-infinity-upgrade-6"></button>
 				<button id="break-infinity-upgrade-7"></button>
+			</div>
+			<div id="break-infinity-upgrades-row-3">
+				<button id="break-infinity-upgrade-8"></button>
 			</div>
 		</div>
 	</div>
@@ -349,6 +450,13 @@
 		<span id="continuum-galaxy-multiplier">0</span>
 		<span id="continuum-galaxy-requirement">Continuum Level 55</span>
 		</div>
+		<div id="continuum-break-infinity">
+		<button id="continuum-break-infinity-activate">
+			Toggle Infinity Continuum
+		</button>
+		<span id="continuum-break-infinity-multiplier">0</span>
+		<span id="continuum-break-infinity-requirement">Continuum Level 70</span>
+		</div>
 	</div>
 
 	<div id="replicanti" class="tab-content">
@@ -364,7 +472,26 @@
 	</div>
 
 	<div id="eternity" class="tab-content">
-
+		<button id="eternity-button"></button>
+		<div id="eternity-milestones">
+			<div id="eternity-milestone-1">1 Eternity<br>Unlock the Time Dimensions</div>
+			<div id="eternity-milestone-2">2 Eternities<br>Keep the 1st row of Infinity upgrades</div>
+			<div id="eternity-milestone-3">3 Eternities<br>Keep the 2nd row of Infinity upgrades</div>
+			<div id="eternity-milestone-4">4 Eternities<br>Keep the 3rd row of Infinity upgrades</div>
+			<div id="eternity-milestone-5">5 Eternities<br>Break Infinity no longer resets</div>
+			<div id="eternity-milestone-6">7 Eternities<br>Keep all Break Infinity upgrades</div>
+			<div id="eternity-milestone-7">10 Eternities<br>Your Continuum level no longer gets reset</div>
+			<div id="eternity-milestone-8">15 Eternities<br>Unlock Continuum for Replicanti upgrades</div>
+			<div id="eternity-milestone-9">20 Eternities<br>Unlock Continuum for Synthetic Galaxies</div>
+			<div id="eternity-milestone-10">25 Eternities<br>Unlock Continuum for the Infinity Dimensions</div>
+			<div id="eternity-milestone-11">35 Eternities<br>Unlock Continuum for the ×2 Infinity Power upgrade</div>
+		</div>
+		<div id="advanced-eternity-milestones">
+			<div id="advanced-eternity-milestone-1">gain multiplier to matter dims</div>
+			<div id="advanced-eternity-milestone-2">gain multiplier to infinity dims</div>
+			<div id="advanced-eternity-milestone-3">gain multiplier to time dims</div>
+			<div id="advanced-eternity-milestone-4">gain multiplier to replication speed</div>
+		</div>
 	</div>
 
 	<div id="reality" class="tab-content">
@@ -404,6 +531,8 @@
 <script src="js/loop_functions/continuum.js"></script>
 <script src="js/loop_functions/replicanti.js"></script>
 <script src="js/loop_functions/infinityDimensions.js"></script>
+<script src="js/loop_functions/eternity.js"></script>
+<script src="js/loop_functions/timeDimensions.js"></script>
 <script src="js/loop_functions/generator.js"></script>
 <script src="js/loop.js"></script>
 <script src="js/objects/dimensions.js"></script>
@@ -411,7 +540,9 @@
 <script src="js/objects/dimboost.js"></script>
 <script src="js/objects/galaxies.js"></script>
 <script src="js/objects/infinityDimensions.js"></script>
+<script src="js/objects/timeDimensions.js"></script>
 <script src="js/infinity/infinity.js"></script>
 <script src="js/infinity/continuum.js"></script>
 <script src="js/infinity/replicanti.js"></script>
+<script src="js/eternity/eternity.js"></script>
 <script src="js/generators/tickspeed_generator.js"></script>

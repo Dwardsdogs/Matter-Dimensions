@@ -137,4 +137,15 @@ function updateContinuumUI() {
 		btn.classList.add("unaffordable");
 		btn.classList.remove("affordable");
 	}
+	//break infinity
+	document.getElementById("continuum-break-infinity-multiplier").textContent =
+		`Continuum Multiplier: +0%`;
+	btn = document.getElementById("continuum-break-infinity-activate");
+	if (game.continuum.breakInfinityUpgrades == true) {
+		btn.classList.add("affordable");
+		btn.classList.remove("unaffordable");
+	} else {
+		btn.classList.add("unaffordable");
+		btn.classList.remove("affordable");
+	}
 }

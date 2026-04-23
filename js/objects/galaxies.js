@@ -49,6 +49,9 @@ function getGalaxyPower() {
 	if (game.infinity.infinityUpgrades.upgrade4 == true) {
 		galaxyPower = galaxyPower.mul(2)
 	}
+	if (game.infinity.infinityPower.gte(1e100)) {
+		galaxyPower = galaxyPower.add(game.infinity.infinityPower.div(1e100).log10().pow(0.5).div(100).mul(galaxyPower))
+	}
 	galaxyPower = galaxyPower.add(1)
 	return galaxyPower
 }

@@ -238,7 +238,7 @@ function updateDimensionsUI() {
 	}
 	//tickspeed
 	document.getElementById("tickspeed-tooltip").textContent =
-	`${getAddedDisplay([game.tickspeedUpgrades, getFreeTickspeedCount()])} Tickspeed Upgrades`;
+	`${getAddedDisplay([game.tickspeedUpgrades, getFreeTickspeedCount(), Decimal.max(game.eternity.timeShards, new Decimal(0.99)).log(1.33).add(1).floor()])} Tickspeed Upgrades`;
 	document.getElementById("tickspeed-multiplier").textContent =
 	`Tickspeed: ${format(getTickspeedMultiplier(), 3)} / sec | ×${format(getTickspeedPower(), 3)} faster / upgrade.`;
 	btn = document.getElementById("buy-tickspeed");

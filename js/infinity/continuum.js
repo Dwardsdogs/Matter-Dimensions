@@ -81,6 +81,13 @@ document.getElementById("continuum-galaxy-activate").onclick = function () {
 	game.continuum.galaxies = true
   }
 };
+document.getElementById("continuum-break-infinity-activate").onclick = function () {
+  if (game.continuum.breakInfinityUpgrades == true) {
+	game.continuum.breakInfinityUpgrades = false
+  } else if (game.continuumLevel.gte(70)) {
+	game.continuum.breakInfinityUpgrades = true
+  }
+};
 
 function updateContinuum() {
 	let addedDimensions = new Decimal(1)
@@ -200,6 +207,16 @@ function updateContinuum() {
 		}
 		game.matterGalaxies = level;
 	}
+	if (game.continuum.breakInfinityUpgrades == true) {
+		let level1 = getContinuumLevel(game.infinity.totalGeneratedIP, 10, 10);
+		let level2 = getContinuumLevel(game.infinity.totalGeneratedIP, 30, 25, 10);
+		let level3 = getContinuumLevel(game.infinity.totalGeneratedIP, 20, 50, 10);
+		let level4 = getContinuumLevel(game.infinity.totalGeneratedIP, 5, 100, 10);
+		game.infinity.breakInfinityUpgrades.upgrade4 = level1;
+		game.infinity.breakInfinityUpgrades.upgrade5 = level2;
+		game.infinity.breakInfinityUpgrades.upgrade6 = level3;
+		game.infinity.breakInfinityUpgrades.upgrade7 = level4;
+	}
 }
 
 function getContinuumLevel(currency, scale, startPrice, scaleStart = 308.25) {
@@ -235,8 +252,7 @@ function getContinuumUpgradeCost() {
 }
 
 function getContinuumMultiplier(lvl) {
-	let multiplier = game.continuumLevel.sub(lvl).pow(0.5).div(40)
-	multiplier = multiplier.add(1)
-	multiplier = Decimal.max(multiplier, new Decimal(1));
-	return multiplier
+	let diff = Decimal.max(game.continuumLevel.sub(lvl), new Decimal(0));
+	let multiplier = diff.pow(0.5).div(40).add(1);
+	return Decimal.max(multiplier, new Decimal(1));
 }

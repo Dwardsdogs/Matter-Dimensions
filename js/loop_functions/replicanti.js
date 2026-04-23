@@ -3,15 +3,35 @@ function updateReplicantiUI() {
 	if (game.infinity.breakInfinityUpgrades.upgrade2 == true) {
 		document.getElementById("open-replicanti-tab").classList.remove("locked")
 	}
-	
+
+	let replicantiInfinityDimensionsBoost = "";
+	if (game.infinity.breakInfinityUpgrades.upgrade8 == true) {
+		replicantiInfinityDimensionsBoost = `Multiplying all Infinity Dimensions by ×${format(game.infinity.replicanti.amount.log10().div(100).pow(3).add(1))}`
+	}
 	document.getElementById("replicanti-amount").innerHTML =
 		`You have ${format(game.infinity.replicanti.amount, 0)} Replicanti<br>
 		<span style="font-size: 0.5em;">
 			Replication speed is divided by 2^(log10(replicanti)/1000)<br>
-			Multiplying all Dimensions by ×${format(Decimal.min(game.infinity.replicanti.amount, new Decimal("1.8e308")))}
+			Multiplying all Dimensions by ×${format(Decimal.min(game.infinity.replicanti.amount, new Decimal("1.8e308")))}<br>
+			${replicantiInfinityDimensionsBoost}
 		</span>`;
-	document.getElementById("synthetic-galaxy-amount").innerHTML =
-		`You have ${format(game.infinity.replicanti.syntheticGalaxies, 0)} Synthetic Galaxies`;
+	if (game.infinity.replicanti.syntheticGalaxies.gte(200)) {
+		document.getElementById("synthetic-galaxy-amount").innerHTML =
+		`Distorted Synthetic Galaxies (${format(game.infinity.replicanti.syntheticGalaxies)})<br>
+		<span style="font-size: 0.5em;">
+			Increased Galaxy cost scaling: Quadratic scaling past 20 (unstable)<br>
+			Exponential scaling past 150 (distorted)
+		</span>`;
+	} else if (game.infinity.replicanti.syntheticGalaxies.gte(20)) {
+		document.getElementById("synthetic-galaxy-amount").innerHTML =
+		`Unstable Synthetic Galaxies (${format(game.infinity.replicanti.syntheticGalaxies)})<br>
+		<span style="font-size: 0.5em;">
+			Each Galaxy is more expensive past 20 Galaxies
+		</span>`;
+	} else {
+		document.getElementById("synthetic-galaxy-amount").innerHTML =
+		`Synthetic Galaxies (${format(game.infinity.replicanti.syntheticGalaxies)})`;
+	}
 	//synthetic galaxy
 	element = document.getElementById("synthetic-galaxy-button")
 	element.innerHTML =

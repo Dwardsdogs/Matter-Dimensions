@@ -1,5 +1,5 @@
 document.getElementById("infinity-button").onclick = function () {
-  triggerInfinity();
+  	triggerInfinity();
 };
 document.getElementById("infinity-upgrade-1").onclick = function () {
 	if (game.infinity.infinityUpgrades.upgrade1 == false) {
@@ -139,8 +139,8 @@ document.getElementById("break-infinity-upgrade-3").onclick = function () {
 	}
 };
 document.getElementById("break-infinity-upgrade-4").onclick = function () {
-	if (game.infinity.infinityPoints.gte(getCostScale(10, 10, game.infinity.breakInfinityUpgrades.upgrade4, 10))) {
-		game.infinity.infinityPoints = game.infinity.infinityPoints.sub(getCostScale(10, 10, game.infinity.breakInfinityUpgrades.upgrade4, 10));
+	if (game.infinity.infinityPoints.gte(getCostScale(10, 10, game.infinity.breakInfinityUpgrades.upgrade4))) {
+		game.infinity.infinityPoints = game.infinity.infinityPoints.sub(getCostScale(10, 10, game.infinity.breakInfinityUpgrades.upgrade4));
 		game.infinity.breakInfinityUpgrades.upgrade4 = game.infinity.breakInfinityUpgrades.upgrade4.add(1);
 	}
 };
@@ -162,10 +162,19 @@ document.getElementById("break-infinity-upgrade-7").onclick = function () {
 		game.infinity.breakInfinityUpgrades.upgrade7 = game.infinity.breakInfinityUpgrades.upgrade7.add(1);
 	}
 };
+document.getElementById("break-infinity-upgrade-8").onclick = function () {
+	if (game.infinity.breakInfinityUpgrades.upgrade8 == false) {
+		if (game.infinity.infinityPoints.gte(1e50)) {
+			game.infinity.breakInfinityUpgrades.upgrade8 = true;
+			game.infinity.infinityPoints = game.infinity.infinityPoints.sub(1e50);
+		}
+	}
+};
 
 function triggerInfinity() {
 	if (game.matter.gte(new Decimal("1.8e308"))) {
 		game.infinity.infinityPoints = game.infinity.infinityPoints.add(getInfinityPointIncome());
+		game.infinity.totalGeneratedIP = game.infinity.totalGeneratedIP.add(getInfinityPointIncome());
 		resetVariables(3);
 	}
 }

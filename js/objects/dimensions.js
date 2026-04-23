@@ -138,6 +138,9 @@ function getDimensionUpgradeMultiplier() {
 	if (game.infinity.infinityUpgrades.upgrade7 == true) {
 		multiplier = multiplier.add(0.2)
 	}
+	if (game.infinity.infinityPower.gte(1e25)) {
+		multiplier = multiplier.mul(game.infinity.infinityPower.div(1e25).pow(0.01))
+	}
 	return multiplier
 }
 
@@ -250,6 +253,20 @@ document.getElementById("buy-dimension-8").onclick = function () {
   buyDimension(8);
 };
 
+function maxAllUpgrades() {
+	for (let i = 0; i < 100; i++) {
+		buyDimension(1);
+		buyDimension(2);
+		buyDimension(3);
+		buyDimension(4);
+		if (game.dimensionBoosts.gte(1)) buyDimension(5);
+		if (game.dimensionBoosts.gte(2)) buyDimension(6);
+		if (game.dimensionBoosts.gte(3)) buyDimension(7);
+		if (game.dimensionBoosts.gte(4)) buyDimension(8);
+		buyTickspeed();
+	}
+}
+
 //keybinds
 const keysDown = new Set();
 
@@ -263,17 +280,7 @@ document.addEventListener("keyup", (event) => {
 
 setInterval(() => {
 	if (keysDown.has("m")) {
-		buyDimension(1);
-		buyDimension(2);
-		buyDimension(3);
-		buyDimension(4);
-
-		if (game.dimensionBoosts.gte(1)) buyDimension(5);
-		if (game.dimensionBoosts.gte(2)) buyDimension(6);
-		if (game.dimensionBoosts.gte(3)) buyDimension(7);
-		if (game.dimensionBoosts.gte(4)) buyDimension(8);
-
-		buyTickspeed();
+		maxAllUpgrades()
 	}
 
 	if (keysDown.has("b")) {

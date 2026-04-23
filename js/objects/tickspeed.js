@@ -37,8 +37,13 @@ function getTickspeedMultiplier() {
 	let effectiveFreeTickspeedCount = getFreeTickspeedCount();
 	let freeTickspeedMultiplier = freeTickspeedPower.pow(effectiveFreeTickspeedCount);
 
+	let eternityTickspeedPower = tickspeedPower;
+	let effectiveEternityTickspeedCount = Decimal.max(game.eternity.timeShards, new Decimal(0.99)).log(1.33).add(1).floor();
+	let eternityTickspeedMultiplier = eternityTickspeedPower.pow(effectiveEternityTickspeedCount);
+
 	multiplier = multiplier.mul(tickspeedUpgradeMultiplier);
 	multiplier = multiplier.mul(freeTickspeedMultiplier);
+	multiplier = multiplier.mul(eternityTickspeedMultiplier);
 	return multiplier;
 }
 

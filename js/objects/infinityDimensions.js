@@ -3,6 +3,11 @@ function updateInfinityDimensions(diff) {
 
 	game.infinity.infinityPower = game.infinity.infinityPower.add(dims.amounts.dim1.mul(getInfinityDimensionMultiplier(1)).mul(diff))
 
+	if (game.infinity.infinityPower.gte(1e200)) {
+		game.infinity.infinityPoints = game.infinity.infinityPoints.add(getInfinityPointIncome().mul(game.infinity.infinityPower.div(1e200).pow(0.05).div(100).mul(diff)))
+		game.infinity.totalGeneratedIP = game.infinity.totalGeneratedIP.add(getInfinityPointIncome().mul(game.infinity.infinityPower.div(1e200).pow(0.05).div(100).mul(diff)))
+	}
+
 	let gain = {
 		dim1: dims.amounts.dim2.mul(getInfinityDimensionMultiplier(2)).mul(diff),
 		dim2: dims.amounts.dim3.mul(getInfinityDimensionMultiplier(3)).mul(diff),
@@ -83,36 +88,40 @@ function getInfinityDimensionCost(dim) {
 		return getCostScale(1, new Decimal(10).pow(scalingMultiplier), game.infinity.infinityDimensions.levels.dim1)
 	}
 	if (dim == 2) {
-		return getCostScale(1e3, new Decimal(1e2).pow(scalingMultiplier), game.infinity.infinityDimensions.levels.dim2)
+		return getCostScale(1e2, new Decimal(1e3).pow(scalingMultiplier), game.infinity.infinityDimensions.levels.dim2)
 	}
 	if (dim == 3) {
-		return getCostScale(1e6, new Decimal(1e3).pow(scalingMultiplier), game.infinity.infinityDimensions.levels.dim3)
+		return getCostScale(1e6, new Decimal(1e6).pow(scalingMultiplier), game.infinity.infinityDimensions.levels.dim3)
 	}
 	if (dim == 4) {
-		return getCostScale(1e12, new Decimal(1e4).pow(scalingMultiplier), game.infinity.infinityDimensions.levels.dim4)
+		return getCostScale(1e12, new Decimal(1e10).pow(scalingMultiplier), game.infinity.infinityDimensions.levels.dim4)
 	}
 	if (dim == 5) {
-		return getCostScale(1e24, new Decimal(1e5).pow(scalingMultiplier), game.infinity.infinityDimensions.levels.dim5)
+		return getCostScale(1e20, new Decimal(1e15).pow(scalingMultiplier), game.infinity.infinityDimensions.levels.dim5)
 	}
 	if (dim == 6) {
-		return getCostScale(1e48, new Decimal(1e6).pow(scalingMultiplier), game.infinity.infinityDimensions.levels.dim6)
+		return getCostScale(1e30, new Decimal(1e21).pow(scalingMultiplier), game.infinity.infinityDimensions.levels.dim6)
 	}
 	if (dim == 7) {
-		return getCostScale(1e96, new Decimal(1e7).pow(scalingMultiplier), game.infinity.infinityDimensions.levels.dim7)
+		return getCostScale(1e42, new Decimal(1e28).pow(scalingMultiplier), game.infinity.infinityDimensions.levels.dim7)
 	}
 	if (dim == 8) {
-		return getCostScale(1e192, new Decimal(1e8).pow(scalingMultiplier), game.infinity.infinityDimensions.levels.dim8)
+		return getCostScale(1e56, new Decimal(1e36).pow(scalingMultiplier), game.infinity.infinityDimensions.levels.dim8)
 	}
 }
 
 function getInfinityDimensionMultiplier(dim) {
 	let dimmult = new Decimal(1)
 	let purchaseMultiplier = new Decimal(2)
+	if (game.infinity.breakInfinityUpgrades.upgrade8 == true) {
+		dimmult = dimmult.mul(game.infinity.replicanti.amount.log10().div(100).pow(3).add(1))
+	}
 	if (dim == 1) {
 		dimmult = purchaseMultiplier
 			.pow(game.infinity.infinityDimensions.levels.dim1)
 			.div(purchaseMultiplier)
 			.mul(dimmult);
+		dimmult = dimmult.mul(new Decimal(2).pow(game.infinity.doubleInfinityPowerUpgrade));
 		dimmult = Decimal.max(dimmult, new Decimal(1));
 		return dimmult
 	}
@@ -197,4 +206,10 @@ document.getElementById("buy-infinity-dimension-7").onclick = function () {
 };
 document.getElementById("buy-infinity-dimension-8").onclick = function () {
 	buyInfinityDimension(8);
+};
+document.getElementById("double-infinity-power-upgrade-button").onclick = function () {
+	if (game.infinity.infinityPoints.gte(getCostScale(1e20, 1e2, game.infinity.doubleInfinityPowerUpgrade))) {
+		game.infinity.infinityPoints = game.infinity.infinityPoints.sub(getCostScale(1e20, 1e2, game.infinity.doubleInfinityPowerUpgrade))
+		game.infinity.doubleInfinityPowerUpgrade = game.infinity.doubleInfinityPowerUpgrade.add(1)
+	}
 };
